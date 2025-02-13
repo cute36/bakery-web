@@ -6,8 +6,8 @@
     <title>Магазин хлебобулочных изделий</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
+            font-family: 'Arial', sans-serif;
+            background-color: #FFF5E1; /* Теплый желтый фон */
             margin: 0;
             padding: 0;
             display: flex;
@@ -16,20 +16,28 @@
             justify-content: center;
             min-height: 100vh;
         }
+        h1 {
+            font-size: 2.5em;
+            color: #FF8C00; /* Оранжевый заголовок */
+            margin-bottom: 30px;
+            text-align: center;
+        }
         .product-list {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
+            margin-bottom: 30px;
         }
         .product-card {
-            background-color: white;
-            padding: 15px;
-            width: 200px;
+            background-color: #FFFFFF;
+            padding: 20px;
+            width: 220px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            transition: transform 0.3s;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+            background-color: #FFFAF0; /* Легкий кремовый фон карточки */
         }
         .product-card:hover {
             transform: scale(1.05);
@@ -37,61 +45,75 @@
         .product-card img {
             width: 100%;
             height: auto;
-            border-radius: 8px;
+            border-radius: 12px;
         }
         .product-card h3 {
-            margin: 10px 0;
-            font-size: 1.2em;
-            color: #333;
+            margin: 15px 0;
+            font-size: 1.3em;
+            color: #FF8C00; /* Оранжевый цвет для текста */
         }
         .product-card p {
             margin: 5px 0;
-            color: #777;
+            color: #FF4500; /* Красноватый цвет цены */
         }
         .product-card button {
-            padding: 10px;
-            background-color: #4CAF50;
+            padding: 12px 20px;
+            background-color: #FF8C00;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 1em;
-            margin-top: 10px;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+            margin-top: 15px;
         }
         .product-card button:hover {
-            background-color: #45a049;
+            background-color: #FF6A00; /* Более яркий оранжевый при наведении */
         }
         .cart {
             margin-top: 30px;
-            padding: 10px;
-            background-color: #fff;
-            border-radius: 8px;
+            padding: 20px;
+            background-color: #FFF8E1;
+            border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 320px;
+            text-align: center;
         }
         .cart h3 {
-            text-align: center;
+            font-size: 1.8em;
+            color: #FF8C00;
         }
         .cart-item {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            padding: 5px 0;
+            font-size: 1.1em;
+            color: #FF4500;
         }
         .cart-item span {
             font-weight: bold;
         }
         .checkout-btn {
             width: 100%;
-            padding: 12px;
+            padding: 15px;
             background-color: #FF5733;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 1.1em;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
         }
         .checkout-btn:hover {
-            background-color: #ff4517;
+            background-color: #E64A19;
+        }
+        /* Анимация для кнопок */
+        button, .checkout-btn {
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        button:hover, .checkout-btn:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
