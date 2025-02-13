@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин хлебобулочных изделий</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .product-card {
+            background-color: white;
+            padding: 15px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .product-card h3 {
+            margin: 10px 0;
+            font-size: 1.2em;
+            color: #333;
+        }
+        .product-card p {
+            margin: 5px 0;
+            color: #777;
+        }
+        .product-card button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+        .product-card button:hover {
+            background-color: #45a049;
+        }
+        .cart {
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .cart h3 {
+            text-align: center;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .cart-item span {
+            font-weight: bold;
+        }
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #FF5733;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+        .checkout-btn:hover {
+            background-color: #ff4517;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Магазин хлебобулочных изделий</h1>
+
+    <div class="product-list">
+        <div class="product-card" id="product-1">
+            <img src="https://via.placeholder.com/150" alt="Хлеб">
+            <h3>Хлеб</h3>
+            <p>30 руб.</p>
+            <button onclick="addToCart('Хлеб', 30)">Добавить в корзину</button>
+        </div>
+
+        <div class="product-card" id="product-2">
+            <img src="https://via.placeholder.com/150" alt="Булочка с корицей">
+            <h3>Булочка с корицей</h3>
+            <p>50 руб.</p>
+            <button onclick="addToCart('Булочка с корицей', 50)">Добавить в корзину</button>
+        </div>
+
+        <div class="product-card" id="product-3">
+            <img src="https://via.placeholder.com/150" alt="Пирог с яблоком">
+            <h3>Пирог с яблоком</h3>
+            <p>150 руб.</p>
+            <button onclick="addToCart('Пирог с яблоком', 150)">Добавить в корзину</button>
+        </div>
+
+        <div class="product-card" id="product-4">
+            <img src="https://via.placeholder.com/150" alt="Торт Шоколадный">
+            <h3>Торт Шоколадный</h3>
+            <p>500 руб.</p>
+            <button onclick="addToCart('Торт Шоколадный', 500)">Добавить в корзину</button>
+        </div>
+    </div>
+
+    <div class="cart" id="cart">
+        <h3>Ваша корзина</h3>
+        <div id="cart-items"></div>
+        <button class="checkout-btn" onclick="checkout()">Оформить заказ</button>
+    </div>
+
+    <script>
+        let cart = [];
+
+        // Функция для добавления товара в корзину
+        function addToCart(productName, price) {
+            const product = { name: productName, price: price, quantity: 1 };
+            const existingProductIndex = cart.findIndex(item => item.name === productName);
+
+            if (existingProductIndex >= 0) {
+                cart[existingProductIndex].quantity++;
+            } else {
+                cart.push(product);
+            }
+
+            updateCart();
+        }
+
+        // Функция для обновления отображения корзины
+        function updateCart() {
+            const cartItemsContainer = document.getElementById("cart-items");
+            cartItemsContainer.innerHTML = '';
+
+            cart.forEach(item => {
+                const cartItem = document.createElement("div");
+                cartItem.classList.add("cart-item");
+                cartItem.innerHTML = `${item.name} x${item.quantity} - ${item.quantity * item.price} руб.`;
+                cartItemsContainer.appendChild(cartItem);
+            });
+        }
+
+        // Функция для оформления заказа
+        function checkout() {
+            const orderDetails = cart.map(item => `${item.name} x${item.quantity} - ${item.quantity * item.price} руб.`).join("\n");
+            const totalAmount = cart.reduce((sum, item) => sum + item.quantity * item.price, 0);
+
+            // Отправка заказа админу через Telegram (интеграция с ботом)
+            const orderMessage = `Новый заказ:\n\n${orderDetails}\nОбщая сумма: ${totalAmount} руб.`;
+
+            // Для демонстрации — отправка в консоль
+            console.log(orderMessage);
+
+            // Здесь будет код для отправки данных в Телеграм (например, с использованием Telegram Bot API)
+            alert('Ваш заказ оформлен! Ожидайте, с вами свяжется менеджер.');
+            cart = [];
+            updateCart();
+        }
+    </script>
+
+</body>
+</html>
